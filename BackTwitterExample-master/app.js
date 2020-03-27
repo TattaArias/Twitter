@@ -11,7 +11,7 @@ var postsRouter = require('./routes/posts.route');
 
 
 // IMPORT DB CONNECTION MANAGER
-const dbManager = require ("./database.config/database.manager");
+const dbManager = require ("./database.config/db.manager");
 
 var app = express();
 
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Set the routing routes to the each script
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/post', postsRouter);
+app.use('/posts', postsRouter);
 
 
 /**

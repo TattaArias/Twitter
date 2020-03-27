@@ -4,21 +4,28 @@ const Sequelize = require("sequelize");
 const sequelizeConnection = require('../database.config/db.connection.js');
 
 //IMPORT MODELS
-const UserModel = require("../model/user.model");
+const FollowerModel = require("../model/follower.model");
 const PostModel = require("../model/post.model");
+const TweetModel = require("../model/tweet.model");
+const UserModel = require("../model/user.model");
 
 //INITIALIZE MODELS
-const User = UserModel (sequelizeConnection, Sequelize);
+const Follower = FollowerModel (sequelizeConnection, Sequelize);
 const Post = PostModel (sequelizeConnection, Sequelize);
+const Tweet = TweetModel (sequelizeConnection, Sequelize);
+const User = UserModel (sequelizeConnection, Sequelize);
 
 //CREATE RELATIONS BETWEEN MODELS
-User.hasMany(Post, { foreignKey: 'idPost', sourceKey: 'idUser' });
-Post.belongsTo( User, { foreignKey: 'idUser', sourceKey: 'idPost' });
+//User.hasMany(Post, { foreignKey: 'idPost', sourceKey: 'idUser' });
+//Post.belongsTo( User, { foreignKey: 'idUser', sourceKey: 'idPost' });
+
 
 //GROUP MODELS
 const models = {
-  User: User,
+  Follower: Follower,
   Post: Post,
+  Tweet: Tweet,
+  User: User
 };
 
 

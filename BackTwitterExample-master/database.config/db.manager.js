@@ -19,6 +19,9 @@ const User = UserModel (sequelizeConnection, Sequelize);
 User.hasMany(Post, { foreignKey: 'idUser', sourceKey: 'idUser' });
 Post.belongsTo( User, { foreignKey: 'idUser', sourceKey: 'idUser' });
 
+User.hasMany(Follower, { foreignKey: 'idUser', sourceKey: 'idUser' });
+Follower.belongsTo( User, { foreignKey: 'idUser', sourceKey: 'idUser' });
+
 
 //GROUP MODELS
 const models = {

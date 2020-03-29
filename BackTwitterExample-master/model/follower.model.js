@@ -7,6 +7,7 @@ module.exports = (sequelize, Sequelize) =>{
         },
         followername: { type: Sequelize.STRING } ,
         creation_date: Sequelize.DATE,
+        idUser: {type: Sequelize.INTEGER}
     }, {
         tableName: "followers"
     });    

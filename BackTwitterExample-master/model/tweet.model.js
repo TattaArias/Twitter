@@ -1,15 +1,16 @@
 module.exports = (sequelize, Sequelize) =>{
-    const tweet = sequelize.define ("tweet", {
+    const Tweet = sequelize.define ("Tweet", {
         idTweet: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true 
         },
-        tweetname: { type: Sequelize.STRING } ,
-        creation_date: Sequelize.DATE,
+        tweet: {
+            type: Sequelize.STRING,
+            unique: true
+        }
     }, {
         tableName: "tweets"
     });    
-    
-    return tweet;
+    return Tweet;
 }

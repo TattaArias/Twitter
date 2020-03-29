@@ -4,7 +4,7 @@
 const dbconfig = {
         HOST: "localhost",
         USER: "root", 
-        PASSWORD: "", 
+        PASSWORD: "Julian2019*", 
         DB: "faketwitter",
         dialect: "mysql",
         pool: {

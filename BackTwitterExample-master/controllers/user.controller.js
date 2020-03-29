@@ -103,16 +103,6 @@ function deleteAllUsers (req, res){
  * @param {*} req 
  * @param {*} res 
  */
-async function findAllUsersByCreatedDate (req, res){
-    try {
-        const { creation_date } = req.params;//Execute query
-        const user = await dbManager.User.findOne({ where: { creation_date: creation_date } });
-        res.json(user);//Send response
-    } catch (e) {
-        console.log(e);// Print error on console
-        res.status(500).send({ message: "Some error occurred" });// Send error message as a response 
-    }
-}
 
 exports.createUser = createUser; 
 exports.findAllUsers = findAllUsers; 
@@ -120,4 +110,3 @@ exports.findOneUser = findOneUser;
 exports.updateUser = updateUser;
 exports.deleteUserByUsername = deleteUserByUsername;
 exports.deleteAllUsers = deleteAllUsers;
-exports.findAllUsersByCreatedDate = findAllUsersByCreatedDate;

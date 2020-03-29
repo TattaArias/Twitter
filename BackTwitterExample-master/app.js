@@ -8,6 +8,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users.route');
 var postsRouter = require('./routes/posts.route');
+var tweetsRouter = require('./routes/tweets.route');
+var followersRouter = require('./routes/followers.route');
 
 
 // IMPORT DB CONNECTION MANAGER
@@ -25,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/posts', postsRouter);
+app.use('/tweets', tweetsRouter);
+app.use('/followers', followersRouter);
 
 
 /**

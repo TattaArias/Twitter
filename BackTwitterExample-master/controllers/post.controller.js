@@ -4,14 +4,14 @@ const dbManager = require ('../database.config/db.manager');
  * @param {*} postObject JSON Object with User information
  */
 async function createPost (req, res) {   
-    console.log("Entra");
     if (!req.body) {// CHECK IF THE REQUEST BODY IS EMPTY
         res.status(400).send({ message: "Request body is empty!!!!" });
         return;
     }
     const newPostObject = {// CREATING THE OBJECT TO PERSIST
         message: req.body.message,
-        published_date: req.body.published_date
+        published_date: req.body.published_date,
+        idUser: req.body.idUser
     }
     dbManager.Post.create(newPostObject).then (// EXECUTING THE CREATE QUERY - INSERT THE OBJECT INTO DATABASE 
         data => { res.send (data); }
@@ -58,7 +58,8 @@ async function updatePost (req, res){
     }
     const newPostObject = {// CREATING THE OBJECT TO PERSIST
         message: req.body.message,
-        published_date: req.body.published_date
+        published_date: req.body.published_date, 
+        idUser: req.body.idUser
     }
     const { idPost } = req.params;//Execute query
     dbManager.Post.update(newPostObject, { where: { idPost: idPost } }).then (// EXECUTING THE CREATE QUERY - INSERT THE OBJECT INTO DATABASE 
@@ -76,7 +77,17 @@ async function updatePost (req, res){
  * @param {*} req 
  * @param {*} res 
  */
-function deletePostByUsername (req, res){ 
+function deletePostBymessage (req, res){ 
+    const { message } = req.params;//Execute query
+    console.log("Mensaje: " + message);
+    dbManager.Post.destroy( { where: { message: message } })// EXECUTING THE CREATE QUERY - INSERT THE OBJECT INTO DATABASE 
+        //data => { res.send (data); }
+    .catch (
+        e => {
+            console.log(e);// Print error on console
+            res.status(500).send({ message: "Some error occurred" });// Send error message as a response 
+        }
+    );
 }
 /**
  * 
@@ -84,20 +95,18 @@ function deletePostByUsername (req, res){
  * @param {*} res 
  */
 function deleteAllPosts (req, res){
-}
-
-/**
- * 
- * @param {*} req 
- * @param {*} res 
- */
-async function findAllPostsByCreatedDate (req, res){
+    dbManager.Post.destroy( { where: {} } )// EXECUTING THE DESTROY QUERY - INSERT THE OBJECT INTO DATABASE 
+    .catch (
+        e => {
+            console.log(e);// Print error on console
+            res.status(500).send({ message: "Some error occurred" });// Send error message as a response 
+        }
+    );
 }
 
 exports.createPost = createPost; 
 exports.findAllPosts = findAllPosts; 
 exports.findOnePost = findOnePost; 
 exports.updatePost = updatePost;
-exports.deletePostByUsername = deletePostByUsername;
+exports.deletePostBymessage = deletePostBymessage;
 exports.deleteAllPosts = deleteAllPosts;
-exports.findAllPostsByCreatedDate = findAllPostsByCreatedDate;
